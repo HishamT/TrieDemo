@@ -18,6 +18,11 @@ class MainActivity : AppCompatActivity() {
         words.insertWord("high")
         words.insertWord("hit")
         words.insertWord("hello")
+        words.insertWord("hit")
+        words.insertWord("hit")
+        words.insertWord("hit")
+        words.insertWord("halcyon")
+        words.insertWord("halcyon")
         val input = findViewById<EditText>(R.id.input)
         val w1 = findViewById<TextView>(R.id.word1)
         val w2 = findViewById<TextView>(R.id.word2)
@@ -34,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if(p0!!.isNotEmpty()) {
-                    var wordList = words.getRestOfWord(p0!![p0.length - 1])
+                    var wordList = words.getRestOfWord(p0.toString())
                     w1.text = wordList[0]
                     w2.text = wordList[1]
                     w3.text = wordList[2]

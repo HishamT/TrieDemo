@@ -35,7 +35,7 @@ class Trie {
         var endOfWord: Boolean = false //set to "true" when the end of a word is reached
         var charMap = hashMapOf<Char, TrieNode>() //map of characters to other nodes to continue a word
         var charFreq = hashMapOf<Char, Int>() //map of character frequency to determine which character should come next in autocomplete
-        var charList: ArrayList<Char> = ArrayList() //list of characters by frequency. Exits only because map can't sorted by value
+        var charList: ArrayList<Char> = ArrayList() //list of characters by frequency. Exists only because map can't sorted by value
     }
     private var root = TrieNode()
     //high
@@ -58,14 +58,16 @@ class Trie {
         }
         tempNode.endOfWord = true
     }
-    private var startNode = root
+
+
 
     /**
      * get rest of word returns top 3 most frequent words based on last character input
      */
-    fun getRestOfWord(c: Char): List<String>{
+    fun getRestOfWord(s: String): List<String>{
         Log.d(t, "Entered getRestOfWord function...")
-        Log.d(t, c.toString())
+        Log.d(t, s)
+        var startNode = root
         var wordList = ArrayList<String>()
         wordList.add(String())
         wordList.add(String())
@@ -74,11 +76,18 @@ class Trie {
         charArrays.add(ArrayList())
         charArrays.add(ArrayList())
         charArrays.add(ArrayList())
-        charArrays[0].add(c)
-        charArrays[1].add(c)
-        charArrays[2].add(c)
-        if(startNode.charMap[c] == null)return wordList
-        startNode = startNode.charMap[c]!!
+        for(c in s.indices) {
+            if (startNode.charMap[s[c]] == null){
+                Log.d(t, "loop broken")
+                return wordList
+            }
+            Log.d(t, s[c].toString())
+            startNode = startNode.charMap[s[c]]!!
+            charArrays[0].add(s[c])
+            charArrays[1].add(s[c])
+            charArrays[2].add(s[c])
+
+        }
         nextWord(startNode,  1, charArrays[0])
         nextWord(startNode,  2, charArrays[1])
         nextWord(startNode,  3, charArrays[2])
@@ -103,7 +112,7 @@ class Trie {
             i++
         }
         word.add(nextChar)
-        Log.d(t, nextChar.toString())
+        //Log.d(t, nextChar.toString())
         var nextNode = currentNode.charMap[nextChar]
         if (nextNode != null) nextWord(nextNode, 1, word) // recursive call since this a tree-traversal system
 
