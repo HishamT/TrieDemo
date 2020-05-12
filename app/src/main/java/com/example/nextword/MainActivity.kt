@@ -41,8 +41,21 @@ class MainActivity : AppCompatActivity() {
                 if(p0!!.isNotEmpty()) {
                     var wordList = words.getRestOfWord(p0.toString())
                     w1.text = wordList[0]
-                    w2.text = wordList[1]
-                    w3.text = wordList[2]
+                    if(wordList[1] == (wordList[0])){
+                        w2.text = " "
+                    }else{
+                        w2.text = wordList[1]
+                    }
+                    if(wordList[2] == wordList[0] || wordList[2] == wordList[1]){
+                        w3.text = " "
+                    }else{
+                        w3.text = wordList[2]
+                    }
+
+                }else{
+                    w1.text = ""
+                    w2.text = ""
+                    w3.text = ""
                 }
             }
 

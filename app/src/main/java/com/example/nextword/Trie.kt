@@ -91,11 +91,17 @@ class Trie {
         nextWord(startNode,  1, charArrays[0])
         nextWord(startNode,  2, charArrays[1])
         nextWord(startNode,  3, charArrays[2])
-        wordList[0] = charArrays[0].toString()
-        wordList[1] = charArrays[1].toString()
-        wordList[2] = charArrays[2].toString()
+        wordList[0] = list2String(charArrays[0])
+        wordList[1] = list2String(charArrays[1])
+        wordList[2] = list2String(charArrays[2])
 
         return wordList
+    }
+
+    private fun list2String(arrayList: ArrayList<Char>): String {
+        var s = ""
+        for(c in arrayList)s += c
+        return s
     }
     //hisham
     /**
