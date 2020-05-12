@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         words.insertWord("hit")
         words.insertWord("halcyon")
         words.insertWord("halcyon")
+        words.insertWord("TECHBREAUX")
         val input = findViewById<EditText>(R.id.input)
         val w1 = findViewById<TextView>(R.id.word1)
         val w2 = findViewById<TextView>(R.id.word2)
@@ -38,8 +40,14 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if(p0!!.isNotEmpty()) {
-                    var wordList = words.getRestOfWord(p0.toString())
+                Log.d(t, p1.toString())
+                Log.d(t, p2.toString())
+                Log.d(t, p3.toString())
+                val stringsArray = p0.toString().split(" ").toTypedArray() //Split string into array of space-separated words
+                val s = stringsArray[stringsArray.size - 1] //Take last word
+                //Complete the word
+                if(s != "") {
+                    var wordList = words.getRestOfWord(s)
                     w1.text = wordList[0]
                     if(wordList[1] == (wordList[0])){
                         w2.text = ""
